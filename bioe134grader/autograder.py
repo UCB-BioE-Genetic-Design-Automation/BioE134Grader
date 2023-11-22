@@ -1,6 +1,6 @@
 import types
 # Import grader modules here
-import TranslateGrader  # Example grader import
+from . import TranslateGrader
 
 class BioE134Autograder:
     @staticmethod
