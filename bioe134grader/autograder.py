@@ -42,7 +42,7 @@ class BioE134Autograder:
 
         grader_name = cls.__name__
         grader = graders.get(grader_name)
-        if grader and hasattr(grader, 'grade'):
+        if grader:
             return grader.grade(cls)
         else:
             return f"hi! Grader script for '{grader_name}' not found."
