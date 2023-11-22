@@ -18,8 +18,7 @@ class BioE134Autograder:
     @staticmethod
     def _handle_class(cls):
         # Logic for handling classes
-        grader_name = cls.__name__ + "Grader"
-        return BioE134Autograder._run_script(grader_name)
+        return BioE134Autograder._run_script(cls)
 
     @staticmethod
     def _handle_function(func):
@@ -30,19 +29,20 @@ class BioE134Autograder:
     @staticmethod
     def _handle_instance(instance):
         # Logic for handling class instances
-        grader_name = type(instance).__name__ + "Grader"
+        grader_name = type(instance).__name__
         return BioE134Autograder._run_script(grader_name)
 
     @staticmethod
-    def _run_script(grader_name):
+    def _run_script(cls):
         # Logic to execute the grader based on its name
         graders = {
-            'TranslateGrader': TranslateGrader,
+            'Translate': TranslateGrader,
             # Add more graders here as needed
         }
 
+        grader_name = cls.__name__
         grader = graders.get(grader_name)
         if grader and hasattr(grader, 'grade'):
-            return grader.grade()
+            return grader.grade(cls)
         else:
-            return f"Grader script for '{grader_name}' not found."
+            return f"hi! Grader script for '{grader_name}' not found."
