@@ -1,5 +1,6 @@
 import types
-import importlib
+# Import grader modules here
+import TranslateGrader  # Example grader import
 
 class BioE134Autograder:
     @staticmethod
@@ -17,27 +18,31 @@ class BioE134Autograder:
     @staticmethod
     def _handle_class(cls):
         # Logic for handling classes
-        grader_script_name = cls.__name__ + "Grader"
-        return BioE134Autograder._run_script(grader_script_name)
+        grader_name = cls.__name__ + "Grader"
+        return BioE134Autograder._run_script(grader_name)
 
     @staticmethod
     def _handle_function(func):
         # Logic for handling functions
-        grader_script_name = func.__name__ + "Grader"
-        return BioE134Autograder._run_script(grader_script_name)
+        grader_name = func.__name__ + "Grader"
+        return BioE134Autograder._run_script(grader_name)
 
     @staticmethod
     def _handle_instance(instance):
         # Logic for handling class instances
-        grader_script_name = type(instance).__name__ + "Grader"
-        return BioE134Autograder._run_script(grader_script_name)
+        grader_name = type(instance).__name__ + "Grader"
+        return BioE134Autograder._run_script(grader_name)
 
     @staticmethod
-    def _run_script(grader_script_name):
-        # Logic to import and run the grader script based on its name
-        try:
-            grader_module = importlib.import_module(grader_script_name)
-            return grader_module.run()  # Assuming each grader script has a 'run' function
-        except ImportError:
-            return f"Grader script for '{grader_script_name}' not found."
+    def _run_script(grader_name):
+        # Logic to execute the grader based on its name
+        graders = {
+            'TranslateGrader': TranslateGrader,
+            # Add more graders here as needed
+        }
 
+        grader = graders.get(grader_name)
+        if grader and hasattr(grader, 'run'):
+            return grader.run()
+        else:
+            return f"Grader script for '{grader_name}' not found."
