@@ -1,7 +1,6 @@
 # TranslateGrader.py
 
 class TranslateGrader:
-    @staticmethod
     def grade(translate_class):
         translate_instance = translate_class()
         translate_instance.initiate()

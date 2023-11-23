@@ -36,7 +36,7 @@ class BioE134Autograder:
     def _run_script(cls):
         # Logic to execute the grader based on its name
         graders = {
-            'Translate': TranslateGrader,
+            'Translate': TranslateGrader(),
             # Add more graders here as needed
         }
 
